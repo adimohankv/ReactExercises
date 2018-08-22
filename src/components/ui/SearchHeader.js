@@ -1,20 +1,19 @@
 import React from 'react';
+import QueryBuilder from '../../utils/updateQuery';
 
 export default class SearchHeader extends React.Component {
     search = (e) => {
         if (e.key === 'Enter') {
-            this.props.history.location.search ?
-                this.props.history.push(`${this.props.history.location.sort}&state=${e.target.value}`) :
-                this.props.history.push(`?state=${e.target.value}`);
-            this.props.onSearchIssues(this.props.userData, this.props.location.search);
+            let query = QueryBuilder(this.props.location.search, 'state', e.target.value)
+            this.props.history.push(query);
+            this.props.onSearchIssues(this.props.userData, query);
         }
     }
 
     change = (e) => {
-        this.props.history.location.search ?
-        this.props.history.push(`${this.props.history.location.search}&sort=${e.target.value}`) :
-        this.props.history.push(`?sort=${e.target.value}`);
-        this.props.onSortIssue(this.props.userData, this.props.location.search);
+        let query = QueryBuilder(this.props.location.search, 'sort', e.target.value)
+        this.props.history.push(query);
+        this.props.onSearchIssues(this.props.userData, query);
     }
 
     render () {

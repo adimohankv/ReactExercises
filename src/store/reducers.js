@@ -51,7 +51,7 @@ export const error = (state = null, action) => (
     state
 )
 
-export const headers = (state = {}, action) => (
+export const headers = (state = null, action) => (
   action.type === C.SET_HEADERS ?
     action.payload :
     state

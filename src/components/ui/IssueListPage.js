@@ -1,7 +1,9 @@
 import React, { Component } from 'react'; 
 import IssueList from '../containers/IssueList';
 import SearchHeader from "../containers/SearchHeader";
+import Pagination from '../containers/Pagination';
 import './App.css';
+
 
 class IssueListPage extends Component {
     componentDidMount () {
@@ -15,7 +17,7 @@ class IssueListPage extends Component {
         <React.Fragment>
             <SearchHeader />
             <IssueList />
-            {/* <Paggination /> */}
+            <Pagination />
         </React.Fragment>
     );
     }
