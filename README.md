@@ -1,2 +1,2 @@
-# SOW React App
-Sample React App
+###Sample Github Issue page using React-Redux
+
