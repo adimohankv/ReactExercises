@@ -25,7 +25,7 @@ export const userData = (state = {}, action) => (
     state
 )
 
-export const loading = (state = false, action) => {
+export const loading = (state = true, action) => {
   switch (action.type) {
 
     case C.FETCHING_STATE :
@@ -39,7 +39,9 @@ export const loading = (state = false, action) => {
 
     case C.FETCH_ISSUE_COUNT :
         return false
-      
+
+    case C.ISSUES_COMMENTS :
+        return false
     default :
         return state
   }
@@ -57,6 +59,24 @@ export const headers = (state = null, action) => (
     state
 )
 
+export const comments = (state = [], action) => {
+  switch (action.type) {
+
+    case C.ISSUES_COMMENTS :
+      return action.payload
+    case C.SET_ISSUE_COMMENT :
+      return [...state, action.payload]
+    default :
+      return state
+  }
+}
+
+export const currentIssueData = (state = {}, action) => (
+  action.type === C.ISSUE_DATA ?
+    action.payload :
+    state
+)
+
 export default combineReducers({
   issues,
   issueCount,
@@ -64,5 +84,7 @@ export default combineReducers({
   userData,
   loading,
   error,
-  headers
+  headers,
+  comments,
+  currentIssueData
 })

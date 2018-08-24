@@ -18,5 +18,3 @@ jspm_packages
 
 # Optional npm cache directory
 .npm
-
-package-lock.json

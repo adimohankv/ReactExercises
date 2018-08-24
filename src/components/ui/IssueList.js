@@ -2,13 +2,12 @@ import React from 'react';
 
 export default class IssueList extends React.Component {
     render () {
-        console.log(this)
         const issueList = this.props.issues.map(issue => (
             <li className="issues">
                 <div className="container">
                     <div className="status">{issue.state}</div>
                     <div className="title">
-                        <a href={'/' + issue.number} className="main-title">{issue.title}</a>
+                        <a href={this.props.location.pathname + '/' + issue.number} className="main-title">{issue.title}</a>
                         <div className="activity">
                             <span className="issue-no">{ issue.number }</span>
                             <span className="issue-status">{issue.state}</span>

@@ -1,17 +1,12 @@
 import IssueList from '../ui/IssueList';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
     return {
-        issues: state.issues
+        issues: state.issues,
+        router: props.router
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         onfetchIssues: repoData => dispatch(fetchIssues(repoData)),
-//         onfetchIssueCount: repoData => dispatch(fetchIssueCount(repoData))
-//     }
-// }
-
-export default connect(mapStateToProps)(IssueList);
+export default withRouter(connect(mapStateToProps)(IssueList));

@@ -63,4 +63,69 @@ export const setUserData = (userData) => (
     payload: userData
   }
 )
+
+export const setComment = (comments) => (
+  {
+    type: C.SET_ISSUE_COMMENT,
+    payload: comments
+  }
+)
+
+export const fetchIssuesComments = (issueData, issueId) => dispatch => {
+  if (issueData) {
+
+    dispatch ({
+      type: C.FETCHING_STATE
+    });
+
+    const { user, repo} = issueData;
+    fetch(`https://api.github.com/repos/${user}/${repo}/issues/${issueId}/comments`)
+          .then(res => {
+            return res.json()}
+          )
+          .then(res => {
+            const savedIssues = JSON.parse(localStorage.getItem(`/${user}/${repo}/issues/${issueId}`))
+            if (savedIssues && savedIssues.length) {
+              res = [...res, ...savedIssues]
+            }
+            dispatch ({
+              type: C.ISSUES_COMMENTS, 
+              payload: res
+            })
+          })
+          .catch(err => {
+            dispatch ({
+              type: C.ADD_ERROR,
+              payload: err
+            })
+          })
+  }
+}
+
+export const fetchIssueData = (issueData, issueId) => dispatch => {
+  if (issueData) {
+
+    dispatch ({
+      type: C.FETCHING_STATE
+    });
+
+    const { user, repo} = issueData;
+    fetch(`https://api.github.com/repos/${user}/${repo}/issues/${issueId}`)
+          .then(res => {
+            return res.json()}
+          )
+          .then(res => {
+            dispatch ({
+              type: C.ISSUE_DATA, 
+              payload: res
+            })
+          })
+          .catch(err => {
+            dispatch ({
+              type: C.ADD_ERROR,
+              payload: err
+            })
+          })
+  }
+}
   
